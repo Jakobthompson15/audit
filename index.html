@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>David — Client Audit</title>
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --black: #0a0a0a;
+      --white: #ffffff;
+      --gray-500: #737373;
+      --gray-700: #404040;
+      --accent: #e00000;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      background: var(--black);
+      color: var(--white);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* — Nav — */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 48px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      flex-shrink: 0;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .badge {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--gray-500);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 5px 12px;
+      border-radius: 100px;
+    }
+
+    /* — Two-column layout — */
+    main {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: stretch;
+      min-height: 0;
+    }
+
+    /* Left: full-height image + text */
+    .text-col {
+      padding: 64px 64px 64px 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 20px;
+      position: relative;
+      background: url('david-bg.jpg') center center / cover no-repeat;
+    }
+
+    .text-col::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(0, 0, 0, 0.92) 40%, rgba(0, 0, 0, 0.72) 100%);
+    }
+
+    .text-col > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    h1 {
+      font-size: clamp(32px, 3.5vw, 56px);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+    }
+
+    h1 em {
+      font-style: normal;
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .subtitle {
+      font-size: 16px;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.6);
+      max-width: 360px;
+    }
+
+    /* Right: widget area */
+    .widget-col {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-left: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 64px;
+    }
+
+    .launch-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 20px;
+      max-width: 300px;
+    }
+
+    .launch-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 20px;
+      background: rgba(224, 0, 0, 0.12);
+      border: 1px solid rgba(224, 0, 0, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+    }
+
+    .launch-card h2 {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+    }
+
+    .launch-card p {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--gray-500);
+    }
+
+    .launch-btn {
+      margin-top: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--accent);
+      color: var(--white);
+      border: none;
+      border-radius: 100px;
+      padding: 14px 28px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+
+    .launch-btn:hover { opacity: 0.85; }
+
+    /* — Footer — */
+    footer {
+      padding: 24px 48px;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    footer p {
+      font-size: 13px;
+      color: var(--gray-700);
+    }
+
+    footer a {
+      font-size: 13px;
+      color: var(--gray-500);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: var(--white);
+    }
+
+    @media (max-width: 700px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+
+      .text-col {
+        padding: 64px 24px;
+      }
+
+      .widget-col {
+        display: none;
+      }
+
+      nav,
+      footer {
+        padding: 20px 24px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <a class="logo" href="#">DAVID AI</a>
+    <span class="badge">Client Portal</span>
+  </nav>
+
+  <main>
+    <div class="text-col">
+      <p class="eyebrow">AI-Powered Audit</p>
+      <h1>Your audit,<br /><em>on demand.</em></h1>
+      <p class="subtitle">Speak with David's AI agent to walk through your audit. Available exclusively for current clients.</p>
+    </div>
+    <div class="widget-col" id="widget-col">
+      <div class="launch-card">
+        <div class="launch-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z" />
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+            <line x1="12" y1="19" x2="12" y2="22" />
+          </svg>
+        </div>
+        <h2>Start your audit</h2>
+        <p>Connect with Kora, your AI audit agent, for a real-time walkthrough of your results.</p>
+        <button class="launch-btn" onclick="document.querySelector('elevenlabs-convai').shadowRoot?.querySelector('button')?.click()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z" />
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+          </svg>
+          Talk to Kora
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <elevenlabs-convai agent-id="agent_7501kpv3q42vfk3bh8z8py7fp291"></elevenlabs-convai>
+
+  <footer>
+    <p>© 2026 getdavid.ai — All rights reserved.</p>
+    <a href="mailto:jakob@davidmarketing.co">Contact</a>
+  </footer>
+
+  <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
+
+</body>
+
+</html>
